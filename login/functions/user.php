@@ -13,12 +13,17 @@
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
 
 		$query = "INSERT into users (username,password) VALUES ('$name', '$pass')";
-		
+
 		if(mysqli_query($link,$query)){
 			return true;
 		}else{
 			return false;
 		}
+	}
+
+	function cek_data()
+	{
+		
 	}
 
 
