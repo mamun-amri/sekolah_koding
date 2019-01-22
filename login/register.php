@@ -1,6 +1,13 @@
 <?php
 	require_once 'core/init.php';
 
+		$error = '';
+		// jika sudah register
+		if( isset($_SESSION['user']) )
+		{
+			header('location: index.php');
+		}
+
 		//validasi register
 		if(isset($_POST['submit']))
 		{
@@ -15,15 +22,16 @@
 				{
 					if(register_user($nama,$pass))
 					{
-						echo "berhasil";
+						$_SESSION['user']=$nama;
+            header('location: index.php');
 					}else{
-						echo "gagal";
+						$error = "gagal";
 					}
 				}else {
-					echo "nama sudah ada";
+					$error = "nama sudah ada";
 				}
 			}else{
-				echo "tidak boles kosong";
+				$error = "tidak boles kosong";
 			}
 		}
 
@@ -37,6 +45,14 @@
  		<input type="Password" name="password"><br><br>
 
  		<input type="submit" name="submit" value="Daftar">
+
+		<br><br>
+		<?php if($error != '') {?>
+      <div id="error">
+        <?php echo $error; ?>
+      </div>
+    <?php } ?>
+
  	</form>
 
  <?php
