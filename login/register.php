@@ -4,18 +4,23 @@
 		//validasi register
 		if(isset($_POST['submit']))
 		{
-			$name = $_POST['username'];
+			$nama = $_POST['username'];
 			$pass = $_POST['password'];
 
 			// pengujian username kosong apa tidak
 			// !empty artinya tidak kosong trim()tidak kosong diawal dan diakhir
-			if(!empty(trim($name)) && !empty(trim($pass)))
+			if(!empty(trim($nama)) && !empty(trim($pass)))
 			{
-				if(register_user($name,$pass))
+				if(register_cek_nama($nama))
 				{
-					echo "berhasil";
-				}else{
-					echo "gagal";
+					if(register_user($nama,$pass))
+					{
+						echo "berhasil";
+					}else{
+						echo "gagal";
+					}
+				}else {
+					echo "nama sudah ada";
 				}
 			}else{
 				echo "tidak boles kosong";
