@@ -72,6 +72,21 @@
 		}
 	}
 
+// jika multi user
+	function cek_status($nama)
+	{
+		global $link;
+
+		$nama  = mysqli_real_escape_string($link,$nama);
+
+		$query = "SELECT role from users where username='$nama'";
+		$result= mysqli_query($link,$query);
+
+		$status=mysqli_fetch_assoc($result)['role'];
+
+		if ($status==1) return $status;
+			else return false;
+	}
 
 
  ?>
