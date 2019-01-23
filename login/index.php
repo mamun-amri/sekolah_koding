@@ -12,6 +12,7 @@
 
 	<h1>Selamat datang <?php echo $_SESSION['user']; ?> dihalaman </h1>
 
+<!-- yang melihat nya admin -->
 	<?php if( cek_status($_SESSION['user']) ){ ?>
 		<div>
 			Halo Admin
