@@ -1,18 +1,47 @@
 <?php
   function tampil()
   {
-    global $link;
-
-    $query = "SELECT * FROM blog";
-    $result= mysqli_query($link,$query);
-    return $result;
+    $query = "SELECT * FROM blog LIMIT 5";
+    return result($query);
   }
 
   function tambah($judul,$isi,$tag)
   {
-    global $link;
-
     $query = "INSERT INTO blog (judul,isi,tag) VALUES ('$judul','$isi','$tag')";
+    return run($query);
+  }
+
+  function cari_data($cari)
+  {
+    $query = "SELECT * FROM blog WHERE judul LIKE '%$cari%'";
+    return result($query);
+  }
+
+  function tampil_per_id($id)
+  {
+    $query = "SELECT * FROM blog WHERE id=$id";
+    return result($query);
+  }
+
+  function result($query)
+  {
+    global $link;
+    if($result= mysqli_query($link,$query) or die('gagal nampilkan data'))
+    {
+      return $result;
+    }
+  }
+
+  function hapus_data($id)
+  {
+    $query = "DELETE FROM blog WHERE id=$id";
+    return run($query);
+  }
+
+
+  function edit_data($judul,$isi,$tag,$id)
+  {
+    $query  = "UPDATE blog SET judul='$judul',isi='$isi',tag='$tag' WHERE id=$id";
     return run($query);
   }
 
@@ -22,5 +51,12 @@
 
     if($result=mysqli_query($link,$query)) return true;
     else return false;
+  }
+
+  function exerpt($string)
+  {
+    $string = substr($string,0,30);
+
+    return $string;
   }
  ?>
