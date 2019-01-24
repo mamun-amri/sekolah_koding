@@ -7,6 +7,8 @@
 
   function tambah($judul,$isi,$tag)
   {
+    $judul  = escape($judul);
+    $isi    = escape($isi);
     $query = "INSERT INTO blog (judul,isi,tag) VALUES ('$judul','$isi','$tag')";
     return run($query);
   }
@@ -41,6 +43,8 @@
 
   function edit_data($judul,$isi,$tag,$id)
   {
+    $judul  = escape($judul);
+    $isi    = escape($isi);
     $query  = "UPDATE blog SET judul='$judul',isi='$isi',tag='$tag' WHERE id=$id";
     return run($query);
   }
@@ -56,7 +60,12 @@
   function exerpt($string)
   {
     $string = substr($string,0,30);
-
     return $string;
+  }
+
+  function escape($data)
+  {
+    global $link;
+    return mysqli_real_escape_string($link,$data);
   }
  ?>

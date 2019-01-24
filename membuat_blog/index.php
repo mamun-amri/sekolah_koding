@@ -3,11 +3,11 @@
   require_once 'view/header.php';
   $artikels = tampil();
 
-  $cari   = $_GET['cari'];
   if (isset($_GET['cari']))
   {
     if ( !empty(trim($cari)) ) {
-      $artikels =cari_data($cari);
+      $cari   = $_GET['cari'];
+      $artikels = cari_data($cari);
     }else {
       echo "silahkan isi untuk mencari";
     }

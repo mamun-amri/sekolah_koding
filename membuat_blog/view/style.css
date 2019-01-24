@@ -27,8 +27,19 @@ h1{
   font-size: 11px;
 }
 
-#menu a{
+a{
   text-decoration: none;
+}
+
+h2 a{
+  color: red;
+}
+
+h2 a:hover{
+  color: maroon;
+}
+
+#menu a{
   color: black;
 }
 
