@@ -1,43 +1,48 @@
 <?php
   require_once 'core/init.php';
-  require_once 'view/header.php';
+
+  if($_SESSION['user'])
+  {
+    header('location:index.php');
+  }else{
 
   $error = '';
 
   if (isset($_POST['submit']))
   {
-    $judul = $_POST['judul'];
-    $isi   = $_POST['isi'];
-    $tag   = $_POST['tag'];
+    $nama    = $_POST['username'];
+    $pass    = $_POST['password'];
 
-    if ( !empty(trim($judul)) && !empty(trim($isi)) ) {
-      if( tambah($judul,$isi,$tagding) )
+    if ( !empty(trim($nama)) && !empty(trim($pass)) ) {
+      if( cek_data($nama,$pass) )
       {
+        $_SESSION['user'] = $nama;
         header('location:index.php');
       }else {
-        $error = 'gagal tambah konten';
+        $error = 'username dan password ada yang salah';
       }
     }else {
-      $error = 'tidak boleh kosong';
+      $error = 'nama dan password tidak boleh kosong';
     }
   }
+
+  require_once 'view/header.php';
+
  ?>
 
   <form action="" method="post">
-    <label for="">Judul</label> <br>
-    <input type="text" name="judul"><br><br>
+    <label for="">username</label> <br>
+    <input type="text" name="username"><br><br>
 
-    <label for="">Isi</label> <br>
-    <textarea name="isi" rows="8" cols="80"></textarea><br><br>
-
-    <label for="">Tag</label> <br>
-    <input type="text" name="tag"><br><br>
+    <label for="">password</label> <br>
+    <input type="password" name="password"><br><br>
     <div id="error">
       <?= $error; ?>
     </div>
     <button type="submit" name="submit">Submit</button>
   </form>
 
+<?php } ?><!-- penutup dari session atas -->
  <?php
    require_once 'view/footer.php';
   ?>

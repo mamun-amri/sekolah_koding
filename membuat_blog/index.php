@@ -1,6 +1,12 @@
 <?php
   require_once 'core/init.php';
-  require_once 'view/header.php';
+
+  $login = false;
+  if($_SESSION['user'])
+  {
+    $login=true;
+  }
+
   $artikels = tampil();
 
   if (isset($_GET['cari']))
@@ -12,6 +18,9 @@
       echo "silahkan isi untuk mencari";
     }
   }
+
+  require_once 'view/header.php';
+
  ?>
 
   <form action="" method="get">
@@ -25,8 +34,10 @@
       </p><br>
       <p class="waktu"> <?= $row['waktu']; ?></p>
       <p class="tag"> Tag : <?= $row['tag']; ?></p><br>
-      <a href="edit.php?id=<?= $row['id']; ?>">Edit</a>
-      <a href="hapus.php?id=<?= $row['id']; ?>">Hapus</a>
+      <?php if($login==true): ?>
+        <a href="edit.php?id=<?= $row['id']; ?>">Edit</a>
+        <a href="hapus.php?id=<?= $row['id']; ?>">Hapus</a>
+      <?php endif; ?>
     </div>
   <?php endwhile; ?>
 

@@ -1,6 +1,10 @@
 <?php
   require_once 'core/init.php';
-  require_once 'view/header.php';
+
+  if(!$_SESSION['user'])
+  {
+    header('location:login.php');
+  }
 
   $error = '';
   $id    = $_GET['id'];
@@ -33,6 +37,8 @@
       $error = 'tidak boleh kosong';
     }
   }
+
+  require_once 'view/header.php';
  ?>
 
   <form action="" method="post">
