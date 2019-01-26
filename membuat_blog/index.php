@@ -4,7 +4,7 @@
   $super_user = $login = false;
   if(isset($_SESSION['user'])){
     $login=true;
-    if(cek_status($_SESSION['user'])==1){
+    if(cek_status($_SESSION['user']) ==1 ){
       $super_user = true;
     }
   }

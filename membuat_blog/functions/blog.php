@@ -1,7 +1,7 @@
 <?php
   function tampil()
   {
-    $query = "SELECT * FROM blog LIMIT 5";
+    $query = "SELECT * FROM blog LIMIT 3";
     return result($query);
   }
 
