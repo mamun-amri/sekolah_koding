@@ -1,11 +1,6 @@
 <?php
   require_once 'core/init.php';
 
-  if($_SESSION['user'])
-  {
-    header('location:index.php');
-  }else{
-
   $error = '';
 
   if (isset($_POST['submit']))
@@ -16,7 +11,7 @@
     if ( !empty(trim($nama)) && !empty(trim($pass)) ) {
       if( cek_data($nama,$pass) )
       {
-        $_SESSION['user'] = $nama;
+        $_SESSION['user']=$nama;
         header('location:index.php');
       }else {
         $error = 'username dan password ada yang salah';
@@ -39,10 +34,9 @@
     <div id="error">
       <?= $error; ?>
     </div>
-    <button type="submit" name="submit">Submit</button>
+    <button type="submit" name="submit">- Masuk -</button>
   </form>
 
-<?php } ?><!-- penutup dari session atas -->
  <?php
    require_once 'view/footer.php';
   ?>

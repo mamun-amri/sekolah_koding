@@ -53,7 +53,7 @@
   {
     global $link;
 
-    if($result=mysqli_query($link,$query)) return true;
+    if(mysqli_query($link,$query)) return true;
     else return false;
   }
 

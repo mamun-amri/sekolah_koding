@@ -1,14 +1,17 @@
 <?php
   require_once 'core/init.php';
 
-  $login = false;
-  if($_SESSION['user'])
-  {
+  $super_user = $login = false;
+  if(isset($_SESSION['user'])){
     $login=true;
+    if(cek_status($_SESSION['user'])==1){
+      $super_user = true;
+    }
   }
 
-  $artikels = tampil();
+  require_once 'view/header.php';
 
+  $artikels = tampil();
   if (isset($_GET['cari']))
   {
     if ( !empty(trim($cari)) ) {
@@ -18,8 +21,6 @@
       echo "silahkan isi untuk mencari";
     }
   }
-
-  require_once 'view/header.php';
 
  ?>
 
@@ -36,8 +37,11 @@
       <p class="tag"> Tag : <?= $row['tag']; ?></p><br>
       <?php if($login==true): ?>
         <a href="edit.php?id=<?= $row['id']; ?>">Edit</a>
+      <?php if($super_user==true): ?>
         <a href="hapus.php?id=<?= $row['id']; ?>">Hapus</a>
       <?php endif; ?>
+      <?php endif; ?>
+
     </div>
   <?php endwhile; ?>
 
