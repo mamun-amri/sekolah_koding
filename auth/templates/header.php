@@ -7,6 +7,7 @@
   </head>
   <body>
     <nav>
+      <h1>Belajar Auth di Mamun Amri</h1>
       <header>
         <a href="login.php">Login</a>
         <a href="register.php">Register</a>
