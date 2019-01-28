@@ -6,5 +6,5 @@
     require_once 'classes/' .$class. '.php';
   });
 
-  $user = new user();
+  $user = new user(); 
  ?>
