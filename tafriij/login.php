@@ -20,6 +20,7 @@
             $password   = $_POST['password'];
             $username   = mysqli_real_escape_string($link,$username);
             $password   = mysqli_real_escape_string($link,$password);
+
             // $query      = mysqli_query($link,"SELECT password FROM users WHERE username='$username'");
             $query      = mysqli_query($link,"SELECT * FROM users WHERE username='$username' AND password='$password'");
               if( mysqli_num_rows($query) > 0 ){
@@ -39,7 +40,7 @@
 
  ?>
  <link rel="stylesheet" href="assets/style.css">
-
+<body id="login">
  <section>
    <div id="form-login">
      <form action="login.php" method="post">
@@ -54,3 +55,4 @@
      </form>
    </div>
  </section>
+</body>

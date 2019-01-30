@@ -6,7 +6,7 @@
 
 body{
   margin: 40px auto;
-  width : 80%;
+  width : 70%;
 }
 
 header{
@@ -66,13 +66,18 @@ footer{
 }
 
 /*===Form Login*/
+#login{
+  background-image: url('1.jpg');
+  background-size: cover;
+
+}
 
 section #form-login{
   margin: 250px auto;
   width : 25%;
-  background-color: silver;
   padding: 25px;
   text-align: center;
+  background-color: rgba(10, 5, 5, 0.3);
 }
 
 section #form-login p a{
