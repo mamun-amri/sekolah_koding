@@ -1,3 +1,11 @@
+<?php
+  $login = false;
+  if(isset($_SESSION['user']))
+  {
+    $login=true;
+  }
+ ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,8 +17,11 @@
     <nav>
       <header>
         <a href="home.php">Home</a>
-        <a href="login.php">Login</a>
-        <a href="register.php">Register</a>
-        <a href="logout.php">Logout</a>
+        <?php if( $login==true ){ ?>
+          <a href="logout.php">Logout</a>
+        <?php }else{ ?>
+          <a href="login.php">Login</a>
+          <a href="register.php">Register</a>
+        <?php } ?>
       </header>
     </nav>

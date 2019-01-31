@@ -11,27 +11,23 @@
     $password   = mysqli_real_escape_string($link,$password);
 
     if( !empty( trim($username) ) && !empty( trim($password) ) ){
-        $username   = $_POST['username'];
-        $username   = mysqli_real_escape_string($link,$username);
-        $query =mysqli_query($link,"SELECT username FROM users WHERE username='$username'");
+        $query      = mysqli_query($link,"SELECT username FROM users WHERE username='$username'");
 
         if(mysqli_num_rows($query) != 0){
-            $username   = $_POST['username'];
-            $password   = $_POST['password'];
-            $username   = mysqli_real_escape_string($link,$username);
-            $password   = mysqli_real_escape_string($link,$password);
+            $query      = mysqli_query($link,"SELECT password FROM users WHERE username ='$username'");
+            $result     = mysqli_fetch_assoc($query);
+            $hash       = $result['password'];
 
-            // $query      = mysqli_query($link,"SELECT password FROM users WHERE username='$username'");
-            $query      = mysqli_query($link,"SELECT * FROM users WHERE username='$username' AND password='$password'");
-              if( mysqli_num_rows($query) > 0 ){
-              $row = mysqli_fetch_assoc($query);
-              $_SESSION['user']=$row['username'];
+            // === verify password hash ===
+            // 1. password aslinya 2.password hash nya
+            if( password_verify($password,$hash) ){
+              $_SESSION['user']=$username;
               header('location:home.php');
-              }else {
-                echo "<script>alert('username dan password ada yang salah');document.location='login.php';</script>";
-              }
+            }else {
+              echo "<script>alert('username dan password ada yang salah');document.location='login.php';</script>";
+            }
         }else {
-          echo "<script>alert('username belum terdaftar');document.location='login.php';</script>";
+          echo "<script>alert('username belum terdaftar');document.location='register.php';</script>";
         }
     }else {
       echo "<script>alert('username dan password tidak boleh kosong');document.location='login.php';</script>";

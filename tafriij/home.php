@@ -20,7 +20,7 @@
 
  <?php
 
-  $query      = mysqli_query($link,"SELECT * FROM blog");
+  $query      = mysqli_query($link,"SELECT * FROM blog ORDER BY id DESC");
   while( $row = mysqli_fetch_array($query) ):?>
 
     <div id="blog">
@@ -35,12 +35,12 @@
             </p>
           </td>
           <td align=justify valign=top>
-          <span> <?= substr($row['isi'],0,600)?></span>... <a href="single.php?id=<?$row=['id']?>">Continou</a>
+          <span> <?= substr($row['isi'],0,600)?></span>... <a href="single.php?tampil=1&id=<?=$row['id'];?>">Continou</a>
           </td>
         </tr>
       </table>
       <a href="input.php?id=<?=$row['id']?>">Edit</a>
-      <a href='home.php?delete=1&id=<?=$row['id']?>' onclick=\"return confirm('apakah benar mau mengahpus')\">Delete</a>
+      <a href='home.php?delete=1&id=<?=$row['id']?>' onclick="return confirm('yakin mau menghapus..! <?=$row['judul']?>');">Delete</a>
     </div>
   <?php endwhile; ?>
 

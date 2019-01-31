@@ -3,6 +3,8 @@
 
   if(!isset($_SESSION['user'])){
     header('location:login.php');
+  }else {
+    header('location:home.php');
   }
 
   $id     = $_POST['id'];

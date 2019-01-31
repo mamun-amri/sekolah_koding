@@ -4,7 +4,7 @@
 
   if(isset($_SESSION['user'])){
     header('location:home.php');
-  }else{
+  }
 
   if( isset($_POST['register']) ){
     $username   = $_POST['username'];
@@ -14,20 +14,16 @@
 
     if( !empty( trim($username) ) && !empty( trim($password) ) ){
         $username   = $_POST['username'];
-        $username   = mysqli_real_escape_string($link,$username);
-        $query =mysqli_query($link,"SELECT username FROM users WHERE username='$username'");
+        $query      = mysqli_query($link,"SELECT username FROM users WHERE username='$username'");
 
         if(mysqli_num_rows($query) == 0){
-            $username   = $_POST['username'];
-            $password   = $_POST['password'];
-            $username   = mysqli_real_escape_string($link,$username);
-            $password   = mysqli_real_escape_string($link,$password);
+            // === menghash password ===
+            // 1.password yang akan di hash 2.algo password hash nya
+            $password   = password_hash($password,PASSWORD_DEFAULT);
 
-            // $password   = password_hash($password,PASSWORD_DEFAULT);
-            $query      = "INSERT INTO users (username,password) VALUES ('$username','$password')";
-              if( mysqli_query($link,$query) ){
-              $row = mysqli_fetch_assoc($query);
-              $_SESSION['user']=$row['username'];
+            $query      = mysqli_query($link,"INSERT INTO users (username,password) VALUES ('$username','$password')");
+              if($query){
+              $_SESSION['user']=$username;
               header('location:home.php');
               }else {
                 echo "<script>alert('anda gagal Daftar');document.location='register.php';</script>";
@@ -58,4 +54,3 @@
    </div>
  </section>
 </body>
-<?php } ?>
